@@ -459,14 +459,3 @@ context.start({
                       cast.framework.messages.Command.QUEUE_NEXT |
                       cast.framework.messages.Command.STREAM_TRANSFER
 });
-
-<style scoped>
-.video {
-  width: 100%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-}
-</style>

@@ -52,7 +52,7 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 castDebugLogger.setEnabled(false);
 
 /**
- * Uncomment below line to show debug overlay.
+ * Uncomment below line to show debug overlay
  */
 castDebugLogger.showDebugLogs(true);
 

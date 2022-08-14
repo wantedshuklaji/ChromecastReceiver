@@ -21,8 +21,8 @@ body {
 cast-media-player {
   --theme-hue: 180;
   --progress-color: rgb(0, 255, 255);
-/*  --splash-image: url('res/background-1.jpg');
-  --splash-size: cover;
+ --splash-image: url('res/ic_launcher_allscreen.png');
+/*  --splash-size: cover;
    --slideshow-interval: 8;
   --slideshow-animation: 3;
   --slideshow-image-1: url('res/background-2.jpg');

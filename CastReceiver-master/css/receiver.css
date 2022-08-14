@@ -21,9 +21,9 @@ body {
 cast-media-player {
   --theme-hue: 180;
   --progress-color: rgb(0, 255, 255);
-  --splash-image: url('res/background-1.jpg');
+/*  --splash-image: url('res/background-1.jpg');
   --splash-size: cover;
-/*   --slideshow-interval: 8;
+   --slideshow-interval: 8;
   --slideshow-animation: 3;
   --slideshow-image-1: url('res/background-2.jpg');
   --slideshow-image-2: url('res/hub-1.jpg');

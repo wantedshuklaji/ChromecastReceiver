@@ -374,8 +374,10 @@ playerManager.setMessageInterceptor(
     castDebugLogger.debug(LOG_RECEIVER_TAG,
       "Interceptor received full URL");
     loadRequestData.media.contentUrl = source;
-//     if(source.includes('.m3u8'))
+//     if(source.includes('.m3u8')){
 //     loadRequestData.media.contentType = 'application/dash+xml';
+                 loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
+  }
 
     return loadRequestData;
 

@@ -273,7 +273,7 @@ playerManager.addEventListener(
       
       
 if(event.error!=undefined)
-console.log(event.error.reason+" ,Chromecast error code- "+event.detailedErrorCode);
+console.log("Customized Error:- Reason->"+event.error.reason+", Chromecast error code-> "+event.detailedErrorCode);
       
       
 });

@@ -351,6 +351,7 @@ function fetchMediaById(id) {
 /**
  * Intercept the LOAD request to load and set the contentUrl and add ads.
  */
+/*
 playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.debug(LOG_RECEIVER_TAG,
@@ -422,7 +423,7 @@ playerManager.setMessageInterceptor(
     // });
   }
 );
-
+*/
 const playbackConfig = new cast.framework.PlaybackConfig();
 
 /**

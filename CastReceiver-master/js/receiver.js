@@ -270,6 +270,12 @@ playerManager.addEventListener(
         'LOAD_FAILED: Verify the load request is set up ' +
         'properly and the media is able to play.');
     }
+      
+      
+if(event.error!=undefined)
+console.log(event.error.reason+" ,Chromecast error code- "+event.detailedErrorCode);
+      
+      
 });
 
 /**

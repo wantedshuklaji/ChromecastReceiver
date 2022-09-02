@@ -21,8 +21,8 @@ limitations under the License.
 
 'use strict';
 
-import { CastQueue } from './queuing.js';
-import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
+// import { CastQueue } from './queuing.js';
+// import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
 /**
  * Constants to be used for fetching media by entity from sample repository.
@@ -282,9 +282,9 @@ console.log("Customized Error:- Reason->"+event.error.reason+", Chromecast error
  * Example analytics tracking implementation. See cast_analytics.js. Must
  * complete TODO item in google_analytics.js.
  */
-const adTracker = new AdsTracker();
-const senderTracker = new SenderTracker();
-const contentTracker = new ContentTracker();
+// const adTracker = new AdsTracker();
+// const senderTracker = new SenderTracker();
+// const contentTracker = new ContentTracker();
 // adTracker.startTracking();
 // senderTracker.startTracking();
 // contentTracker.startTracking();
@@ -351,7 +351,7 @@ function fetchMediaById(id) {
 /**
  * Intercept the LOAD request to load and set the contentUrl and add ads.
  */
-/*
+
 playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.debug(LOG_RECEIVER_TAG,
@@ -423,7 +423,7 @@ playerManager.setMessageInterceptor(
     // });
   }
 );
-*/
+
 const playbackConfig = new cast.framework.PlaybackConfig();
 
 /**
@@ -461,7 +461,7 @@ controls.assignButton(
 );
 
 context.start({
-  queue: new CastQueue(),
+  /*queue: new CastQueue(),*/
   playbackConfig: playbackConfig,
   supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
                       cast.framework.messages.Command.QUEUE_PREV |

@@ -49,33 +49,34 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
  * Uncomment below line to enable debug logger and show a 'DEBUG MODE' tag at
  * top left corner.
  */
-<!--castDebugLogger.setEnabled(false);
 
-/**
- * Uncomment below line to show debug overlay
- */
-castDebugLogger.showDebugLogs(false);
+// castDebugLogger.setEnabled(false);
 
-/**
- * Set verbosity level for Core events.
- */
-castDebugLogger.loggerLevelByEvents = {
-  'cast.framework.events.category.CORE':
-    cast.framework.LoggerLevel.INFO,
-  'cast.framework.events.EventType.MEDIA_STATUS':
-    cast.framework.LoggerLevel.DEBUG
-};
+// /**
+//  * Uncomment below line to show debug overlay
+//  */
+// castDebugLogger.showDebugLogs(false);
 
-if (!castDebugLogger.loggerLevelByTags) {
-  castDebugLogger.loggerLevelByTags = {};
-}
+// /**
+//  * Set verbosity level for Core events.
+//  */
+// castDebugLogger.loggerLevelByEvents = {
+//   'cast.framework.events.category.CORE':
+//     cast.framework.LoggerLevel.INFO,
+//   'cast.framework.events.EventType.MEDIA_STATUS':
+//     cast.framework.LoggerLevel.DEBUG
+// };
 
-/**
- * Set verbosity level for custom tag.
- * Enables log messages for error, warn, info and debug.
- */
-castDebugLogger.loggerLevelByTags[LOG_RECEIVER_TAG] =
-  cast.framework.LoggerLevel.DEBUG;-->
+// if (!castDebugLogger.loggerLevelByTags) {
+//   castDebugLogger.loggerLevelByTags = {};
+// }
+
+// /**
+//  * Set verbosity level for custom tag.
+//  * Enables log messages for error, warn, info and debug.
+//  */
+// castDebugLogger.loggerLevelByTags[LOG_RECEIVER_TAG] =
+//   cast.framework.LoggerLevel.DEBUG;
 
 
 // Custom implementation---------------

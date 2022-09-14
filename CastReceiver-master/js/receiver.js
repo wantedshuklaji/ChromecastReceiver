@@ -49,7 +49,8 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
  * Uncomment below line to enable debug logger and show a 'DEBUG MODE' tag at
  * top left corner.
  */
-/*castDebugLogger.setEnabled(false);
+/*
+castDebugLogger.setEnabled(false);
 
 /**
  * Uncomment below line to show debug overlay

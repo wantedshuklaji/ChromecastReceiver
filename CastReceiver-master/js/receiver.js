@@ -388,8 +388,8 @@ playerManager.setMessageInterceptor(
 //                  loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
 //   }
     playbackConfig.manifestRequestHandler = requestInfo => {
-        if(!media.customData.mediaInfo.geaders!==undefined)
-    requestInfo.headers = media.customData.mediaInfo.geaders;//{Origin: "google.com", Hello: "World"};
+//         if(!loadRequestData.media.customData.mediaInfo.geaders!==undefined)
+    requestInfo.headers = loadRequestData.media.customData.mediaInfo.geaders;//{Origin: "google.com", Hello: "World"};
     };
 //     playbackConfig.licenseRequestHandler = requestInfo => {
 //     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};

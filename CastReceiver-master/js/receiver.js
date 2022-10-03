@@ -387,6 +387,7 @@ playerManager.setMessageInterceptor(
 //     loadRequestData.media.contentType = 'application/dash+xml';
 //                  loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
 //   }
+        playerManager.setPlaybackConfig(playbackConfig);
 
     return loadRequestData;
 
@@ -433,6 +434,10 @@ const playbackConfig = new cast.framework.PlaybackConfig();
  * media content buffered. Default is 10.
  */
 playbackConfig.autoResumeDuration = 5;
+playbackConfig.manifestRequestHandler = requestInfo => {
+    requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
+};
+
 castDebugLogger.info(LOG_RECEIVER_TAG,
   `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
 

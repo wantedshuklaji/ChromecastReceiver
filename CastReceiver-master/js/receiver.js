@@ -389,7 +389,7 @@ playerManager.setMessageInterceptor(
 //   }
     playbackConfig.manifestRequestHandler = requestInfo => {
 //         if(!loadRequestData.media.customData.mediaInfo.geaders!==undefined)
-    requestInfo.headers = {"Origin": "https://mcloud.to", "Accept": "*/*", "User-Agent": "Mozilla/5.0 (Linux; Android 11; Infinix X693 Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/94.0.4606.85 Mobile Safari/537.36", "Referer": "https://mcloud.to/"};//JSON.stringify(loadRequestData.media.customData.mediaInfo.geaders).replace(/\n/g, ",");//{Origin: "google.com", Hello: "World"};
+    requestInfo.headers =JSON.stringify(loadRequestData.media.customData.mediaInfo.geaders);
     };
 //     playbackConfig.licenseRequestHandler = requestInfo => {
 //     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};

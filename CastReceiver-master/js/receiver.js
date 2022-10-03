@@ -389,7 +389,7 @@ playerManager.setMessageInterceptor(
 //   }
     playbackConfig.manifestRequestHandler = requestInfo => {
 //         if(!loadRequestData.media.customData.mediaInfo.geaders!==undefined)
-    requestInfo.headers =JSON.stringify(loadRequestData.media.customData.mediaInfo.geaders);
+    requestInfo.headers =loadRequestData.media.customData.mediaInfo.geaders;
     };
 //     playbackConfig.licenseRequestHandler = requestInfo => {
 //     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};

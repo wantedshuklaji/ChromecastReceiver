@@ -387,17 +387,6 @@ playerManager.setMessageInterceptor(
 //     loadRequestData.media.contentType = 'application/dash+xml';
 //                  loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
 //   }
-    playbackConfig.manifestRequestHandler = requestInfo => {
-//         if(!loadRequestData.media.customData.mediaInfo.geaders!==undefined)
-    requestInfo.headers =loadRequestData.media.customData.mediaInfo.geaders;
-    };
-//     playbackConfig.licenseRequestHandler = requestInfo => {
-//     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
-//     };
-//     playbackConfig.segmentRequestHandler = requestInfo => {
-//     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
-//     };
-    playerManager.setPlaybackConfig(playbackConfig);
 
     return loadRequestData;
 
@@ -444,7 +433,6 @@ const playbackConfig = new cast.framework.PlaybackConfig();
  * media content buffered. Default is 10.
  */
 playbackConfig.autoResumeDuration = 5;
-
 castDebugLogger.info(LOG_RECEIVER_TAG,
   `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
 

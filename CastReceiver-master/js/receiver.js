@@ -387,16 +387,16 @@ playerManager.setMessageInterceptor(
 //     loadRequestData.media.contentType = 'application/dash+xml';
 //                  loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
 //   }
-    playbackConfig.manifestRequestHandler = requestInfo => {
-    requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
-    };
-    playbackConfig.licenseRequestHandler = requestInfo => {
-    requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
-    };
-    playbackConfig.segmentRequestHandler = requestInfo => {
-    requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
-    };
-    playerManager.setPlaybackConfig(playbackConfig);
+//     playbackConfig.manifestRequestHandler = requestInfo => {
+//     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
+//     };
+//     playbackConfig.licenseRequestHandler = requestInfo => {
+//     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
+//     };
+//     playbackConfig.segmentRequestHandler = requestInfo => {
+//     requestInfo.headers = {Origin: "google.com"}//, Hello: "World"};
+//     };
+//     playerManager.setPlaybackConfig(playbackConfig);
 
     return loadRequestData;
 

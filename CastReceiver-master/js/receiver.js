@@ -235,6 +235,22 @@ playerManager.addEventListener(
         //   textTracksManager.setActiveByLanguage('en');
 
 
+        } else if(json.action==="SUBTITLE_STYLE") {
+            const trackStyle = json.textTrackStyle
+            const textTracksManager = playerManager.getTextTracksManager();
+            const textTrackStyle = new cast.framework.messages.TextTrackStyle();
+            textTrackStyle.backgroundColor = trackStyle.backgroundColor
+            textTrackStyle.foregroundColor = trackStyle.foregroundColor
+            textTrackStyle.fontScale = trackStyle.fontScale
+            textTrackStyle.edgeType = trackStyle.edgeType
+            textTrackStyle.edgeColor = trackStyle.edgeColor
+            textTrackStyle.fontGenericFamily = trackStyle.fontGenericFamily
+            textTrackStyle.fontStyle = trackStyle.fontStyle
+            textTrackStyle.windowType = trackStyle.windowType
+          //  textTrackStyle.windowColor = trackStyle.windowColor
+          //  textTrackStyle.windowRoundedCornerRadius = trackStyle.windowRoundedCornerRadius
+            
+            textTracksManager.setTextTrackStyle(textTrackStyle)
         }
 
   }

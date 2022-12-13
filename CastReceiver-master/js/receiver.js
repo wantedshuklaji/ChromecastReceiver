@@ -37,6 +37,10 @@ const playerManager = context.getPlayerManager();
 
 
 const LOG_RECEIVER_TAG = 'Receiver';
+var globalLoadRequestData;
+var setHlsSegmentFormat = false;
+var mediaSessionId=1;
+
 
 /**
  * Debug Logger
@@ -247,11 +251,33 @@ playerManager.addEventListener(
             textTrackStyle.fontGenericFamily = trackStyle.fontGenericFamily
             textTrackStyle.fontStyle = trackStyle.fontStyle
             textTrackStyle.windowType = trackStyle.windowType
-          //  textTrackStyle.windowColor = trackStyle.windowColor
-          //  textTrackStyle.windowRoundedCornerRadius = trackStyle.windowRoundedCornerRadius
+            textTrackStyle.windowColor = trackStyle.windowColor
+            textTrackStyle.windowRoundedCornerRadius = trackStyle.windowRoundedCornerRadius
             
             textTracksManager.setTextTrackStyle(textTrackStyle)
         }
+       else if(json.action==="PLAYBACK_SPEED"){
+
+//          const video = document.getElementById('castMediaElement');
+//          if(video){
+//             video.playbackRate = json.speed;
+//          }
+//          else if(globalLoadRequestData){
+//              const s=new cast.framework.messages.SetPlaybackRateRequestData();  
+//              s.playbackRate=json.speed;
+//              s.requestId=globalLoadRequestData.requestId;
+//              s.mediaSessionId=globalLoadRequestData.mediaSessionId;
+//              playerManager.load(s);
+//           }
+         if(globalLoadRequestData){
+        context.sendCustomMessage("urn:x-cast:com.google.cast.media",undefined,{
+        type: "SET_PLAYBACK_RATE",
+        playbackRate: json.speed,
+        mediaSessionId: mediaSessionId,
+        requestId: globalLoadRequestData.requestId
+        });
+         }
+       }
 
   }
 
@@ -281,6 +307,15 @@ context.addCustomMessageListener(CUSTOM_CHANNEL, function(customEvent) {
  */
 playerManager.addEventListener(
   cast.framework.events.EventType.ERROR, (event) => {
+//     if (event.detailedErrorCode == cast.framework.events.DetailedErrorCode.HLS_NETWORK_INVALID_SEGMENT) {
+//       // Failed parsing HLS fragments. Will retry with HLS segments format set to 'TS'
+//       setHlsSegmentFormat = true;
+//       if(globalLoadRequestData){
+//       playerManager.load(globalLoadRequestData);
+//       }
+  
+//     }
+      
     castDebugLogger.error(LOG_RECEIVER_TAG,
       'Detailed Error Code - ' + event.detailedErrorCode);
     if (event && event.detailedErrorCode == 905) {
@@ -369,13 +404,75 @@ function fetchMediaById(id) {
 /**
  * Intercept the LOAD request to load and set the contentUrl and add ads.
  */
+const HlsSegmentFormat = {
+    UNKNOWN: 0,
+    AAC: 1,
+    AC3: 2,
+    MP3: 3,
+    TS: 4,
+    TS_AAC: 5,
+    E_AC3: 6,
+    FMP4: 7
+}
 
 playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.debug(LOG_RECEIVER_TAG,
       `loadRequestData: ${JSON.stringify(loadRequestData)}`);
-     loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;  
-//       loadRequestData.media.hlsVideoSegmentFormat="fmp4";
+      context.sendCustomMessage(CUSTOM_CHANNEL,undefined,{
+           requestId: loadRequestData.requestId
+        });  
+      
+    if(loadRequestData.media.contentId.includes("//peertube."))  {
+           loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;  
+      loadRequestData.media.hlsVideoSegmentFormat=cast.framework.messages.HlsSegmentFormat.FMP4;
+    
+    }else if(loadRequestData.media.contentId.includes(".ted.")){
+        loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
+    }
+//       else {
+//         loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
+//     }
+//     const customData = loadRequestData.media.customData;
+//     if (customData != undefined) {
+//     const hlsSegmentFormat = customData.hlsSegmentFormat;
+//     if (hlsSegmentFormat != undefined){
+
+//     switch (hlsSegmentFormat) {
+//         case HlsSegmentFormat.AAC:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.AAC;
+//             break;
+//         case HlsSegmentFormat.AC3:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.AC3;
+//             break;
+//         case HlsSegmentFormat.MP3:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.MP3;
+//             break;
+//         case HlsSegmentFormat.TS:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
+//             break;
+//         case HlsSegmentFormat.TS_AAC:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS_AAC;
+//             break;
+//         case HlsSegmentFormat.E_AC3:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.E_AC3;
+//             break;
+//         case HlsSegmentFormat.FMP4:
+//             loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;
+//             break;
+//     }
+//     }
+//   }   
+//       loadRequestData.mediaSessionId=890;
+//       loadRequestData.requestId=190;
+      globalLoadRequestData=loadRequestData;
+//      loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;  
+      
+//      if (setHlsSegmentFormat) {
+//          loadRequestData.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;  
+//       loadRequestData.media.hlsVideoSegmentFormat=cast.framework.messages.HlsSegmentFormat.FMP4;
+//       setHlsSegmentFormat = false;
+//     }
 
     // If the loadRequestData is incomplete return an error message
     if (!loadRequestData || !loadRequestData.media) {
@@ -405,7 +502,7 @@ playerManager.setMessageInterceptor(
 //     loadRequestData.media.contentType = 'application/dash+xml';
 //                  loadRequestData.media.streamType = cast.framework.messages.StreamType.LIVE;
 //   }
-
+//     loadRequestData.playbackRate=2.0;
     return loadRequestData;
 
     // Add breaks to the media information and set the contentUrl
@@ -443,6 +540,28 @@ playerManager.setMessageInterceptor(
     // });
   }
 );
+
+
+
+const playerData = new cast.framework.ui.PlayerData();
+const playerDataBinder = new cast.framework.ui.PlayerDataBinder(playerData);
+  
+playerDataBinder.addEventListener(
+  cast.framework.ui.PlayerDataEventType.MEDIA_SESSION_ID_CHANGED,
+  (e) => {
+    if (!e.value) return;
+    console.log(playerData.mediaSessionId);
+    mediaSessionId=playerData.mediaSessionId;
+      context.sendCustomMessage(CUSTOM_CHANNEL,undefined,{
+        mediaSessionId: mediaSessionId
+        });  
+      
+// 	const data = JSON.stringify({"chapterId":playerData.media.customData.chapterId,
+//     "position":Math.trunc(e.value*1000),
+//     "duration":Math.trunc(playerData.duration*1000)})
+// 	makeRequest("http://192.168.1.100:8383/watching/set",data)
+  });
+
 
 const playbackConfig = new cast.framework.PlaybackConfig();
 
